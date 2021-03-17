@@ -1862,6 +1862,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     letters: function letters() {
@@ -1874,13 +1884,46 @@ __webpack_require__.r(__webpack_exports__);
     },
     wordLetters: function wordLetters() {
       return this.word.split("");
+    },
+    lettersMatched: function lettersMatched() {
+      var _this2 = this;
+
+      var matched = 0;
+      this.wordLetters.forEach(function (letter) {
+        if (_this2.attemptedLetters.includes(letter)) {
+          matched++;
+        }
+      });
+      return matched === this.wordLetters.length;
+    },
+    hasLost: function hasLost() {
+      return this.failedAttempts >= 10;
+    }
+  },
+  watch: {
+    lettersMatched: function lettersMatched(newVal, oldVal) {
+      if (newVal) {
+        axios.get("/api/game-won/".concat(this.gameId)).then(function (res) {
+          console.log(res);
+        });
+      }
+    },
+    hasLost: function hasLost(newVal, oldVal) {
+      if (newVal) {
+        console.log(newVal);
+        axios.get("/api/game-lost/".concat(this.gameId)).then(function (res) {
+          console.log(res);
+        });
+      }
     }
   },
   data: function data() {
     return {
       attemptedLetters: [],
-      word: "CHARRIOTT",
-      failedAttempts: 0
+      word: "word",
+      failedAttempts: 0,
+      successfulAttempts: 0,
+      gameId: 0
     };
   },
   methods: {
@@ -1890,9 +1933,28 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.attemptedLetters.push(letter);
+    },
+    newWord: function newWord() {
+      var _this3 = this;
+
+      axios.get('/api/new-game').then(function (res) {
+        _this3.attemptedLetters = [];
+        _this3.word = res.data.word;
+        _this3.gameId = res.data.id;
+        _this3.failedAttempts = 0;
+        _this3.successfulAttempts = 0;
+        _this3.successfulAttempts = 0;
+      });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this4 = this;
+
+    axios.get('/api/new-game').then(function (res) {
+      _this4.word = res.data.word;
+      _this4.gameId = res.data.id;
+    });
+  }
 });
 
 /***/ }),
@@ -2121,7 +2183,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".game[data-v-fcbe3ade] {\n  width: 90%;\n  max-width: 800px;\n  margin: auto;\n  display: flex;\n  flex-direction: column;\n}\n.game__letter-cont[data-v-fcbe3ade] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-wrap: wrap;\n}\n.game__word-cont[data-v-fcbe3ade] {\n  padding: 20px 0;\n  display: flex;\n  justify-content: center;\n}\n.game__letter-button[data-v-fcbe3ade] {\n  background-color: #195cff;\n  color: white;\n  font-size: 18px;\n  border: 2px solid white;\n  margin: 10px;\n  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n}\n.game__word-letter[data-v-fcbe3ade] {\n  background-color: lightgrey;\n  margin: 5px;\n  font-size: 30px;\n  padding: 10px;\n  border-radius: 5px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".game[data-v-fcbe3ade] {\n  width: 90%;\n  max-width: 800px;\n  margin: auto;\n  display: flex;\n  flex-direction: column;\n}\n.game__letter-cont[data-v-fcbe3ade] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-wrap: wrap;\n}\n.game__word-cont[data-v-fcbe3ade] {\n  padding: 20px 0;\n  display: flex;\n  justify-content: center;\n}\n.game__letter-button[data-v-fcbe3ade] {\n  background-color: #195cff;\n  color: white;\n  font-size: 18px;\n  border: 2px solid white;\n  margin: 10px;\n  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n}\n.game__word-letter[data-v-fcbe3ade] {\n  background-color: lightgrey;\n  margin: 5px;\n  font-size: 30px;\n  padding: 10px;\n  border-radius: 5px;\n}\n.game__result[data-v-fcbe3ade] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20673,25 +20735,75 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "game__letter-cont" },
-      _vm._l(_vm.letters, function(letter) {
-        return _c(
-          "button",
-          {
-            staticClass: "game__letter-button",
-            on: {
-              click: function($event) {
-                return _vm.attemptLetter(letter)
-              }
-            }
-          },
-          [_vm._v("\n            " + _vm._s(letter) + "\n        ")]
+    _vm.failedAttempts < 10 && !_vm.lettersMatched
+      ? _c(
+          "div",
+          { staticClass: "game__letter-cont" },
+          _vm._l(_vm.letters, function(letter) {
+            return _c(
+              "button",
+              {
+                staticClass: "game__letter-button",
+                on: {
+                  click: function($event) {
+                    return _vm.attemptLetter(letter)
+                  }
+                }
+              },
+              [_vm._v("\n            " + _vm._s(letter) + "\n        ")]
+            )
+          }),
+          0
         )
-      }),
-      0
-    )
+      : _vm.lettersMatched
+      ? _c(
+          "div",
+          { staticClass: "game__result" },
+          [
+            _c("h1", [_vm._v("Winner")]),
+            _vm._v(" "),
+            _c("vs-button", { on: { click: _vm.newWord } }, [_vm._v("Again")]),
+            _vm._v(" "),
+            _c(
+              "vs-button",
+              {
+                attrs: { border: "" },
+                on: {
+                  click: function($event) {
+                    return _vm.$router.push("/start-game")
+                  }
+                }
+              },
+              [_vm._v("Back")]
+            )
+          ],
+          1
+        )
+      : _vm.hasLost
+      ? _c(
+          "div",
+          { staticClass: "game__result" },
+          [
+            _c("h1", [_vm._v("Loser")]),
+            _vm._v(" "),
+            _c("vs-button", { on: { click: _vm.newWord } }, [_vm._v("Again")]),
+            _vm._v(" "),
+            _c(
+              "vs-button",
+              {
+                attrs: { border: "" },
+                on: {
+                  click: function($event) {
+                    return _vm.$router.push("/start-game")
+                  }
+                }
+              },
+              [_vm._v("Back")]
+            )
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
