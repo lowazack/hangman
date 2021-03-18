@@ -1872,6 +1872,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     letters: function letters() {
@@ -1903,17 +1933,13 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     lettersMatched: function lettersMatched(newVal, oldVal) {
       if (newVal) {
-        axios.get("/api/game-won/".concat(this.gameId)).then(function (res) {
-          console.log(res);
-        });
+        axios.get("/api/game-won/".concat(this.gameId));
       }
     },
     hasLost: function hasLost(newVal, oldVal) {
       if (newVal) {
         console.log(newVal);
-        axios.get("/api/game-lost/".concat(this.gameId)).then(function (res) {
-          console.log(res);
-        });
+        axios.get("/api/game-lost/".concat(this.gameId));
       }
     }
   },
@@ -2076,14 +2102,83 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/StartGame.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      games: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/games').then(function (res) {
+      _this.games = res.data;
+    });
+  },
+  methods: {
+    logout: function logout() {
+      document.cookie.split(";").forEach(function (c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      });
+      this.$store.commit('logout');
+      this.$router.push('/');
+    }
+  }
+});
 
 /***/ }),
 
@@ -2183,7 +2278,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".game[data-v-fcbe3ade] {\n  width: 90%;\n  max-width: 800px;\n  margin: auto;\n  display: flex;\n  flex-direction: column;\n}\n.game__letter-cont[data-v-fcbe3ade] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-wrap: wrap;\n}\n.game__word-cont[data-v-fcbe3ade] {\n  padding: 20px 0;\n  display: flex;\n  justify-content: center;\n}\n.game__letter-button[data-v-fcbe3ade] {\n  background-color: #195cff;\n  color: white;\n  font-size: 18px;\n  border: 2px solid white;\n  margin: 10px;\n  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n}\n.game__word-letter[data-v-fcbe3ade] {\n  background-color: lightgrey;\n  margin: 5px;\n  font-size: 30px;\n  padding: 10px;\n  border-radius: 5px;\n}\n.game__result[data-v-fcbe3ade] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".game[data-v-fcbe3ade] {\n  width: 90%;\n  max-width: 800px;\n  margin: auto;\n  display: flex;\n  flex-direction: column;\n}\n.game__svg-cont[data-v-fcbe3ade] {\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n}\n.game__letter-cont[data-v-fcbe3ade] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-wrap: wrap;\n}\n.game__word-cont[data-v-fcbe3ade] {\n  padding: 20px 0;\n  display: flex;\n  justify-content: center;\n}\n.game__letter-button[data-v-fcbe3ade] {\n  background-color: #195cff;\n  color: white;\n  font-size: 18px;\n  border: 2px solid white;\n  margin: 10px;\n  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n}\n.game__word-letter[data-v-fcbe3ade] {\n  background-color: lightgrey;\n  margin: 5px;\n  font-size: 30px;\n  padding: 10px;\n  border-radius: 5px;\n}\n.game__result[data-v-fcbe3ade] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n}\n.game line[data-v-fcbe3ade] {\n  stroke: black;\n  stroke-width: 4;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2255,7 +2350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".start-game[data-v-8fdf8936] {\n  height: 100vh;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".start-game[data-v-8fdf8936] {\n  height: 100vh;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20427,9 +20522,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _StartGame_vue_vue_type_template_id_8fdf8936_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StartGame.vue?vue&type=template&id=8fdf8936&scoped=true& */ "./resources/js/views/StartGame.vue?vue&type=template&id=8fdf8936&scoped=true&");
 /* harmony import */ var _StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StartGame.vue?vue&type=script&lang=js& */ "./resources/js/views/StartGame.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 /* harmony import */ var _StartGame_vue_vue_type_style_index_0_id_8fdf8936_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StartGame.vue?vue&type=style&index=0&id=8fdf8936&lang=scss&scoped=true& */ "./resources/js/views/StartGame.vue?vue&type=style&index=0&id=8fdf8936&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -20518,11 +20610,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StartGame.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/StartGame.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default())); 
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StartGame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -20718,7 +20806,140 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "game" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.failedAttempts))]),
+    _c("div", { staticClass: "game__svg-cont" }, [
+      _c("svg", { attrs: { height: "400", width: "400" } }, [
+        _c("g", { attrs: { id: "body" } }, [
+          _vm.failedAttempts >= 5
+            ? _c("g", { attrs: { id: "head" } }, [
+                _c("circle", {
+                  attrs: {
+                    cx: "200",
+                    cy: "80",
+                    r: "20",
+                    stroke: "black",
+                    "stroke-width": "4",
+                    fill: "white"
+                  }
+                }),
+                _vm._v(" "),
+                _c("g", { attrs: { id: "rEyes" } }, [
+                  _c("circle", { attrs: { cx: "193", cy: "80", r: "4" } }),
+                  _vm._v(" "),
+                  _c("circle", { attrs: { cx: "207", cy: "80", r: "4" } })
+                ]),
+                _vm._v(" "),
+                _c("g", { staticClass: "hide", attrs: { id: "xEyes" } }, [
+                  _c("line", {
+                    attrs: { x1: "190", y1: "78", x2: "196", y2: "84" }
+                  }),
+                  _vm._v(" "),
+                  _c("line", {
+                    attrs: { x1: "204", y1: "78", x2: "210", y2: "84" }
+                  }),
+                  _vm._v(" "),
+                  _c("line", {
+                    attrs: { x1: "190", y1: "84", x2: "196", y2: "78" }
+                  }),
+                  _vm._v(" "),
+                  _c("line", {
+                    attrs: { x1: "204", y1: "84", x2: "210", y2: "78" }
+                  })
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.failedAttempts >= 6
+            ? _c("line", {
+                attrs: { x1: "200", y1: "100", x2: "200", y2: "150" }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.failedAttempts >= 7
+            ? _c("line", {
+                attrs: {
+                  id: "armL",
+                  x1: "200",
+                  y1: "120",
+                  x2: "170",
+                  y2: "140"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.failedAttempts >= 8
+            ? _c("line", {
+                attrs: {
+                  id: "armR",
+                  x1: "200",
+                  y1: "120",
+                  x2: "230",
+                  y2: "140"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.failedAttempts >= 9
+            ? _c("line", {
+                attrs: {
+                  id: "legL",
+                  x1: "200",
+                  y1: "150",
+                  x2: "180",
+                  y2: "190"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.failedAttempts >= 10
+            ? _c("line", {
+                attrs: {
+                  id: "legR",
+                  x1: "200",
+                  y1: "150",
+                  x2: "220",
+                  y2: "190"
+                }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm.failedAttempts >= 1
+          ? _c("line", { attrs: { x1: "10", y1: "250", x2: "150", y2: "250" } })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.failedAttempts >= 1
+          ? _c("line", {
+              attrs: { id: "door1", x1: "150", y1: "250", x2: "200", y2: "250" }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.failedAttempts >= 1
+          ? _c("line", {
+              attrs: { id: "door2", x1: "200", y1: "250", x2: "250", y2: "250" }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.failedAttempts >= 1
+          ? _c("line", {
+              attrs: { x1: "250", y1: "250", x2: "390", y2: "250" }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.failedAttempts >= 2
+          ? _c("line", { attrs: { x1: "100", y1: "250", x2: "100", y2: "20" } })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.failedAttempts >= 3
+          ? _c("line", { attrs: { x1: "100", y1: "20", x2: "200", y2: "20" } })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.failedAttempts >= 4
+          ? _c("line", {
+              attrs: { id: "rope", x1: "200", y1: "20", x2: "200", y2: "60" }
+            })
+          : _vm._e()
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -21023,7 +21244,103 @@ var render = function() {
           }
         },
         [_vm._v("Start Game")]
-      )
+      ),
+      _vm._v(" "),
+      _c("vs-button", { on: { click: _vm.logout } }, [_vm._v("Logout")]),
+      _vm._v(" "),
+      _c("vs-table", {
+        scopedSlots: _vm._u([
+          {
+            key: "thead",
+            fn: function() {
+              return [
+                _c(
+                  "vs-tr",
+                  [
+                    _c("vs-th", [
+                      _vm._v("\n                    Name\n                ")
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-th", [
+                      _vm._v("\n                    Word\n                ")
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-th", [
+                      _vm._v(
+                        "\n                    difficulty\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-th", [
+                      _vm._v("\n                    Time\n                ")
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-th", [
+                      _vm._v("\n                    Outcome\n                ")
+                    ])
+                  ],
+                  1
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "tbody",
+            fn: function() {
+              return _vm._l(_vm.games, function(game) {
+                return _c(
+                  "vs-tr",
+                  { key: game.id, attrs: { data: game } },
+                  [
+                    _c("vs-td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(game.user.name) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(game.word) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(game.difficulty) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(game.duration) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-td", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(game.hasLost ? "Lost" : "Won") +
+                          "\n                "
+                      )
+                    ])
+                  ],
+                  1
+                )
+              })
+            },
+            proxy: true
+          }
+        ])
+      })
     ],
     1
   )
@@ -64209,6 +64526,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_6__.default.Store({
   mutations: {
     setUser: function setUser(state, payload) {
       state.user = payload;
+    },
+    logout: function logout(state) {
+      state.user = null;
     }
   },
   plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__.default)()]

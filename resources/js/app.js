@@ -18,6 +18,9 @@ const store = new Vuex.Store({
     mutations: {
         setUser(state, payload){
             state.user = payload;
+        },
+        logout(state){
+            state.user = null
         }
     },
     plugins: [createPersistedState()]

@@ -50,4 +50,16 @@ class GameController extends Controller
         }
         return response()->json($game);
     }
+
+    public function games()
+    {
+        $games = Game::where('hasLost','=',true)
+            ->orWhere('hasWon', '=', true)
+            ->orderBy('hasWon', 'DESC')
+            ->orderBy('difficulty', 'DESC')
+            ->get();
+
+
+        return response()->json($games);
+    }
 }

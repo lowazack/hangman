@@ -1,6 +1,36 @@
 <template>
     <div class="game">
-        <h1>{{ failedAttempts }}</h1>
+        <div class="game__svg-cont">
+            <svg height="400" width="400">
+                <g id="body">
+                    <g id="head" v-if="failedAttempts >= 5">
+                        <circle cx="200" cy="80" r="20" stroke="black" stroke-width="4" fill="white"/>
+                        <g id="rEyes">
+                            <circle cx="193" cy="80" r="4"/>
+                            <circle cx="207" cy="80" r="4"/>
+                        </g>
+                        <g id="xEyes" class="hide">
+                            <line x1="190" y1="78" x2="196" y2="84"/>
+                            <line x1="204" y1="78" x2="210" y2="84"/>
+                            <line x1="190" y1="84" x2="196" y2="78"/>
+                            <line x1="204" y1="84" x2="210" y2="78"/>
+                        </g>
+                    </g>
+                    <line x1="200" y1="100" x2="200" y2="150" v-if="failedAttempts >= 6"/>
+                    <line id="armL" x1="200" y1="120" x2="170" y2="140" v-if="failedAttempts >= 7"/>
+                    <line id="armR" x1="200" y1="120" x2="230" y2="140" v-if="failedAttempts >= 8"/>
+                    <line id="legL" x1="200" y1="150" x2="180" y2="190" v-if="failedAttempts >= 9"/>
+                    <line id="legR" x1="200" y1="150" x2="220" y2="190" v-if="failedAttempts >= 10"/>
+                </g>
+                <line x1="10" y1="250" x2="150" y2="250" v-if="failedAttempts >= 1"/>
+                <line id="door1" x1="150" y1="250" x2="200" y2="250" v-if="failedAttempts >= 1"/>
+                <line  id="door2" x1="200" y1="250" x2="250" y2="250" v-if="failedAttempts >= 1"/>
+                <line x1="250" y1="250" x2="390" y2="250" v-if="failedAttempts >= 1"/>
+                <line x1="100" y1="250" x2="100" y2="20" v-if="failedAttempts >= 2"/>
+                <line x1="100" y1="20" x2="200" y2="20" v-if="failedAttempts >= 3"/>
+                <line id="rope" x1="200" y1="20" x2="200" y2="60" v-if="failedAttempts >= 4"/>
+            </svg>
+        </div>
         <div class="game__word-cont">
             <span class="game__word-letter" v-for="letter in wordLetters">
                 {{ attemptedLetters.includes(letter) ? letter : '_' }}
@@ -55,14 +85,12 @@ export default {
         lettersMatched(newVal, oldVal){
             if(newVal){
                 axios.get(`/api/game-won/${this.gameId}`)
-                    .then(res => {console.log(res)})
             }
         },
         hasLost(newVal, oldVal) {
             if (newVal) {
                 console.log(newVal)
                 axios.get(`/api/game-lost/${this.gameId}`)
-                    .then(res => {console.log(res)})
             }
         }
     },
@@ -117,6 +145,12 @@ export default {
     display: flex;
     flex-direction: column;
 
+    &__svg-cont {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
     &__letter-cont {
         display: flex;
         align-items: center;
@@ -154,6 +188,11 @@ export default {
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    line {
+        stroke: black;
+        stroke-width: 4;
     }
 }
 </style>
